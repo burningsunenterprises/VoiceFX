@@ -5,7 +5,7 @@
  * 
  *  Use is subject to license terms.
  * 
- *  This file is available and licensed under the following license:
+ *  The VoiceFX Framework is available and licensed under the following license:
  * 
  *  Redistribution and use in source binary forms, without modification,
  *  is permitted provided that the following conditions are met:
@@ -34,31 +34,3 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.bse.voicefx;
-
-import javafx.async.JavaTaskBase;
-import javafx.async.RunnableFuture;
-
-/**
- * @author Eric M. Smith   Burning Sun Enterprises
- */
-
-public class VoiceFX extends JavaTaskBase, VoiceFXListener {
-
-  // The configuration file for the
-  public var createListener: function(): RunnableFuture;
-
-  // The method to call when a receive operation is completed.
-  public var onReceive: function(token: String, grammar: String): Void;
-
-  // The actual speech engine being used.
-  var engine: VoiceFXImpl;
-
-  public override function receiveToken(token: String, grammar: String): Void {
-    onReceive(token, grammar);
-  }
-
-  public override function create(): RunnableFuture {
-    engine = createListener() as VoiceFXImpl;
-  }
-}
